@@ -1,0 +1,108 @@
+<div class="container mt-lg-3">
+  <div class="row">
+    <div class="col d-flext align-items-start justify-content-start">
+      <h3>فئات الاصناف</h3>
+      <div>
+        <button
+          class="btn btn-success btn-sm mb-3"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+        >
+          إضافة فئة <i class="fa fa-plus" aria-hidden="true"></i>
+        </button>
+      </div>
+      <table class="table table-bordered table-stripped border-primary">
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>اسم الصنف</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of categories; index as i">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.catName }}</td>
+            <td style="text-align: center">
+              <button
+                class="btn btn-success btn-sm m-1"
+                (click)="OpenForEdit(item)"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal"
+              >
+                تعديل <i class="fa fa-edit" aria-hidden="true"></i>
+              </button>
+              <button
+                class="btn btn-danger btn-sm"
+                (click)="deleteCat(item.id)"
+              >
+                حذف <i class="fa fa-trash" aria-hidden="true"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title fs-5" id="exampleModalLabel">اضافة فئة</h2>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="fg">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">اسم الفئة</label>
+            <input type="text" formControlName="catName" class="form-control" />
+          </div>
+
+          <div class="input-group mb-3">
+            <input
+              type="file"
+              formControlName="imgPath"
+              class="form-control"
+              id="inputGroupFile02"
+            />
+            <label class="input-group-text" for="inputGroupFile02">تحميل</label>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              id="btnAdd"
+              type="button"
+              (click)="addCat()"
+              class="btn btn-primary"
+            >
+              حفظ
+            </button>
+            <button
+              type="button"
+              id="cancel"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              اغلاق
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
